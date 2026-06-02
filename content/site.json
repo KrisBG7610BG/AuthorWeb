@@ -1,0 +1,159 @@
+{
+  "author": {
+    "name": "Frozen Over The Moon",
+    "tagline": "Author of The Wandering Fairy, a LitRPG world-hopping fantasy about forbidden knowledge, soul weapons, and strange realms.",
+    "shortBio": "Frozen Over The Moon writes The Wandering Fairy, a Royal Road LitRPG about Soren, world-hopping mysteries, and power systems that keep getting stranger.",
+    "longBio": "Replace this biography with the author's real story. This area is meant for a warm, first-person author note: why The Wandering Fairy exists, what kinds of worlds it explores, and where readers can follow future releases.",
+    "email": "hello@example.com",
+    "socials": [
+      {
+        "label": "Royal Road",
+        "url": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping"
+      },
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B0GTVT7XG3?ref_=cm_sw_r_ffobk_cp_ud_dp_TS6SGE2W35YMMZR75NYB&bestFormat=true"
+      },
+      {
+        "label": "Goodreads",
+        "url": "https://example.com"
+      },
+      {
+        "label": "Discord",
+        "url": "https://example.com"
+      }
+    ]
+  },
+  "links": {
+    "royalRoad": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping",
+    "royalRoadChapter1": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping/chapter/1822719/chapter-1-enchanted-forest",
+    "royalRoadChapter105": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping/chapter/2101357/chapter-105-chronicled-failures",
+    "amazon": "https://www.amazon.com/dp/B0GTVT7XG3?ref_=cm_sw_r_ffobk_cp_ud_dp_TS6SGE2W35YMMZR75NYB&bestFormat=true",
+    "newsletterNote": "Occasional updates only. No spam, no cursed chain letters.",
+    "newsletterEndpoint": ""
+  },
+  "latestPublished": {
+    "chapter": 301,
+    "title": "Castle within Castle within Castle",
+    "volume": "Vol. 4",
+    "volumeNumber": 4,
+    "totalVolumes": 10,
+    "plannedChapters": 750,
+    "volumeChapter": 30,
+    "volumePlannedChapters": 130,
+    "url": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping/chapter/3472814/chapter-301-castle-within-castle-within-castle",
+    "checkedAt": "2026-05-31"
+  },
+  "books": [
+    {
+      "title": "The Wandering Fairy: Board of Fate",
+      "coverLabel": "Board of Fate",
+      "series": "The Wandering Fairy",
+      "description": "Soren follows a strange answer across worlds and dimensions, chasing forbidden knowledge through LitRPG systems, mythic powers, and faerie-touched danger.",
+      "status": "Book 1 available",
+      "links": [
+        {
+          "label": "Buy on Amazon",
+          "url": "https://www.amazon.com/dp/B0GTVT7XG3?ref_=cm_sw_r_ffobk_cp_ud_dp_TS6SGE2W35YMMZR75NYB&bestFormat=true"
+        },
+        {
+          "label": "Read on Royal Road",
+          "url": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Full Novel",
+      "percent": 40,
+      "phase": "10 planned volumes",
+      "note": "The full story is planned for 10 volumes. The current published arc is Volume 4."
+    }
+  ],
+  "gallery": [
+    {
+      "title": "Soren's First Stop",
+      "artist": "Placeholder Artist",
+      "category": "Official artwork",
+      "credit": "https://example.com"
+    },
+    {
+      "title": "The Lands of Fantasia",
+      "artist": "Reader Name",
+      "category": "Fanart",
+      "credit": "https://example.com"
+    },
+    {
+      "title": "Soul Weapon Study",
+      "artist": "Placeholder Artist",
+      "category": "Official artwork",
+      "credit": "https://example.com"
+    },
+    {
+      "title": "Faerie Laboratory",
+      "artist": "Reader Name",
+      "category": "Fanart",
+      "credit": "https://example.com"
+    },
+    {
+      "title": "Board of Fate Cover Placeholder",
+      "artist": "Placeholder Artist",
+      "category": "Official artwork",
+      "credit": "https://example.com"
+    },
+    {
+      "title": "World-Hopper Sketch",
+      "artist": "Reader Name",
+      "category": "Fanart",
+      "credit": "https://example.com"
+    }
+  ],
+  "posts": [
+    {
+      "slug": "welcome-to-the-new-site",
+      "title": "Welcome to The Wandering Fairy Home Page",
+      "date": "2026-05-01",
+      "author": "Frozen Over The Moon",
+      "tags": [
+        "site news",
+        "updates"
+      ],
+      "excerpt": "A fresh old-school corner for The Wandering Fairy links, progress notes, art, and reader updates.",
+      "content": [
+        "This is placeholder post content. Replace it with a real launch note, release announcement, or personal update.",
+        "The blog structure is local and data-driven for now, which keeps the project simple while leaving room for a CMS later."
+      ]
+    },
+    {
+      "slug": "where-the-next-arc-stands",
+      "title": "Where the Next Arc Stands",
+      "date": "2026-05-12",
+      "author": "Frozen Over The Moon",
+      "tags": [
+        "progress",
+        "royal road"
+      ],
+      "excerpt": "A placeholder progress update for the next Royal Road chapter batch or story arc.",
+      "content": [
+        "Use this post for chapter timing, rewrite notes, stub announcements, or arc progress.",
+        "The progress page will keep the most useful numbers visible without turning every writing day into a public performance."
+      ]
+    },
+    {
+      "slug": "fanart-friday",
+      "title": "Fanart Friday: Fairies, Stars, and Suspicious Rituals",
+      "date": "2026-05-24",
+      "author": "Frozen Over The Moon",
+      "tags": [
+        "fanart",
+        "community"
+      ],
+      "excerpt": "A little gallery update and a reminder to send credit links with every submission.",
+      "content": [
+        "Fanart makes the world feel inhabited by more than one imagination. This post is a placeholder for community highlights.",
+        "When adding real art, update the gallery data with title, artist, category, credit link, and alt text."
+      ]
+    }
+  ]
+}

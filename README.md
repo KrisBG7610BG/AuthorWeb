@@ -14,29 +14,20 @@ Then visit `http://127.0.0.1:4173`.
 
 ## Edit Content
 
-Editable content now lives in a few small JSON files so Pages CMS is easier to use:
+Editable content lives in `content/site.json`. Pages CMS uses `.pages.yml` to expose that file in a friendly editor.
 
-- `content/site.json` for author info, links, latest-publication fallback, and progress bars
-- `content/books.json` for books
-- `content/gallery.json` for gallery items
-- `content/posts.json` for blog posts
-
-This means the author can add a new book or blog post in Pages CMS without digging through one giant content file.
-
-- Add a book in `content/books.json` with `title`, `coverImage`, `series`, `description`, `status`, and `links`.
-- Add a progress bar in `content/site.json` under `projects`.
-- Add gallery art in `content/gallery.json` with `title`, `image`, `alt`, `artist`, `category`, and optional credit fields.
-- Add a blog post in `content/posts.json` with `slug`, `title`, `date`, `featuredImage`, `tags`, `excerpt`, and `content`.
+- Edit the novel: update `books` with `title`, `series`, `description`, `status`, and `links`.
+- Add a progress bar: add an object to `projects` with `name`, `percent`, `phase`, and `note`.
+- Add gallery art: add an object to `gallery` with `title`, `artist`, `category`, and `credit`.
+- Add a blog post: add an object to `posts` with `slug`, `title`, `date`, `author`, `tags`, `excerpt`, and `content`.
 
 Replace newsletter copy, author bio, email, and social links in `content/site.json`. The Amazon and Royal Road URLs are already wired into `links`.
 
 ## Pages CMS
 
-This repo includes `.pages.yml` for Pages CMS. After the site is on GitHub, connect the repository at `https://pagescms.org/`; editors will see separate CMS sections for site settings, books, gallery, and blog posts.
+This repo includes `.pages.yml` for Pages CMS. After the site is on GitHub, connect the repository at `https://pagescms.org/`; editors can update `content/site.json` through the CMS and commit changes back to GitHub.
 
-The CMS media folder is now `images/`, so uploaded art and covers can be selected directly inside the editor.
-
-For GitHub Pages, keep the project as static files. The site loads the JSON content files directly in the browser.
+For GitHub Pages, keep the project as static files. The site loads `content/site.json` in the browser.
 
 ## Newsletter
 

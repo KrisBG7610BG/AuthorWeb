@@ -38,7 +38,6 @@ const defaultSiteData = {
     {
       title: "The Wandering Fairy: Board of Fate",
       coverLabel: "Board of Fate",
-      coverImage: "/images/94680-the-wandering-fairy.jpg",
       series: "The Wandering Fairy",
       description: "Soren follows a strange answer across worlds and dimensions, chasing forbidden knowledge through LitRPG systems, mythic powers, and faerie-touched danger.",
       status: "Book 1 available",
@@ -52,7 +51,12 @@ const defaultSiteData = {
     { name: "Full Novel", percent: 40, phase: "10 planned volumes", note: "The full story is planned for 10 volumes. The current published arc is Volume 4." }
   ],
   gallery: [
-    { title: "The Wandering Fairy Cover", image: "/images/94680-the-wandering-fairy.jpg", alt: "The Wandering Fairy cover art.", artist: "Official artwork", category: "Official artwork", creditLabel: "Official work", credit: "" }
+    { title: "Soren's First Stop", artist: "Placeholder Artist", category: "Official artwork", credit: "https://example.com" },
+    { title: "The Lands of Fantasia", artist: "Reader Name", category: "Fanart", credit: "https://example.com" },
+    { title: "Soul Weapon Study", artist: "Placeholder Artist", category: "Official artwork", credit: "https://example.com" },
+    { title: "Faerie Laboratory", artist: "Reader Name", category: "Fanart", credit: "https://example.com" },
+    { title: "Board of Fate Cover Placeholder", artist: "Placeholder Artist", category: "Official artwork", credit: "https://example.com" },
+    { title: "World-Hopper Sketch", artist: "Reader Name", category: "Fanart", credit: "https://example.com" }
   ],
   posts: [
     {
@@ -60,8 +64,6 @@ const defaultSiteData = {
       title: "Welcome to The Wandering Fairy Home Page",
       date: "2026-05-01",
       author: "Frozen Over The Moon",
-      featuredImage: "/images/The Wandering Fairy V2.png",
-      featuredImageAlt: "A magical Wandering Fairy illustration with a glowing book and swirling power.",
       tags: ["site news", "updates"],
       excerpt: "A fresh old-school corner for The Wandering Fairy links, progress notes, art, and reader updates.",
       content: [
@@ -125,30 +127,13 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function loadSiteData() {
-  const baseData = cloneData(defaultSiteData);
-  const [siteContent, booksContent, galleryContent, postsContent] = await Promise.all([
-    fetchJson("content/site.json"),
-    fetchJson("content/books.json"),
-    fetchJson("content/gallery.json"),
-    fetchJson("content/posts.json")
-  ]);
-
-  siteData = {
-    ...baseData,
-    ...(siteContent || {})
-  };
-
-  if (Array.isArray(booksContent?.books)) siteData.books = booksContent.books;
-  if (Array.isArray(galleryContent?.gallery)) siteData.gallery = galleryContent.gallery;
-  if (Array.isArray(postsContent?.posts)) siteData.posts = postsContent.posts;
-
-  siteData.author ||= baseData.author;
-  siteData.links ||= baseData.links;
-  siteData.latestPublished ||= baseData.latestPublished;
-  siteData.projects ||= baseData.projects;
-  siteData.books ||= baseData.books;
-  siteData.gallery ||= baseData.gallery;
-  siteData.posts ||= baseData.posts;
+  try {
+    const response = await fetch("content/site.json", { cache: "no-store" });
+    if (!response.ok) return;
+    siteData = await response.json();
+  } catch {
+    siteData = defaultSiteData;
+  }
 }
 
 async function loadLatestPublishedData() {
@@ -187,7 +172,7 @@ function updateNav(path) {
 }
 
 function renderHome() {
-  const latestPost = siteData.posts[0] || defaultSiteData.posts[0];
+  const latestPost = siteData.posts[0];
   main.innerHTML = `
     <section class="hero">
       <div class="panel hero-copy">
@@ -253,6 +238,7 @@ function renderHome() {
     </section>
   `;
   bindForms();
+  bindPassport();
 }
 
 function renderBooks() {
@@ -303,7 +289,7 @@ function renderLatestPublished() {
 }
 
 function renderGallery(activeCategory = "All") {
-  const categories = ["All", ...new Set(siteData.gallery.map((item) => item.category).filter(Boolean))];
+  const categories = ["All", "Fanart", "Official artwork"];
   const items = activeCategory === "All"
     ? siteData.gallery
     : siteData.gallery.filter((item) => item.category === activeCategory);
@@ -351,7 +337,7 @@ function renderPost(slug) {
       <h1>${post.title}</h1>
       <p class="post-meta">${formatDate(post.date)} by ${post.author}</p>
       <ul class="tag-list">${post.tags.map((tag) => `<li>${tag}</li>`).join("")}</ul>
-      ${renderFeaturedImage(post)}
+      <div class="featured-image" role="img" aria-label="Featured image placeholder for ${post.title}"></div>
       ${post.content.map((paragraph) => `<p>${paragraph}</p>`).join("")}
       <a class="button" href="#/blog">Back to blog</a>
     </article>
@@ -441,7 +427,7 @@ function renderNewsletter() {
 function renderBookCard(book) {
   return `
     <article class="book-card">
-      ${renderCover(book)}
+      <div class="cover" role="img" aria-label="Cover placeholder for ${book.title}">${book.coverLabel || book.title}</div>
       <div>
         <span class="status">${book.status}</span>
         <h3>${book.title}</h3>
@@ -470,16 +456,12 @@ function renderProject(project) {
 }
 
 function renderArtCard(item) {
-  const creditMarkup = item.credit
-    ? `<a href="${item.credit}" target="_blank" rel="noreferrer">${item.creditLabel || "Credit link"}</a>`
-    : `<span class="post-meta">${item.creditLabel || "Official artwork"}</span>`;
-
   return `
     <article class="art-card">
-      ${renderGalleryImage(item)}
+      <div class="art-image" role="img" aria-label="${item.title} placeholder artwork"></div>
       <h3>${item.title}</h3>
       <p class="post-meta">${item.category} by ${item.artist}</p>
-      ${creditMarkup}
+      <a href="${item.credit}" target="_blank" rel="noreferrer">Credit link</a>
     </article>
   `;
 }
@@ -611,54 +593,4 @@ function formatDate(value) {
     month: "long",
     day: "numeric"
   }).format(new Date(`${value}T00:00:00`));
-}
-
-function renderCover(book) {
-  if (book.coverImage) {
-    return `
-      <div class="cover has-image">
-        <img src="${book.coverImage}" alt="Cover art for ${book.title}">
-      </div>
-    `;
-  }
-
-  return `<div class="cover" role="img" aria-label="Cover placeholder for ${book.title}">${book.coverLabel || book.title}</div>`;
-}
-
-function renderGalleryImage(item) {
-  if (item.image) {
-    return `
-      <div class="art-image has-image">
-        <img src="${item.image}" alt="${item.alt || item.title}">
-      </div>
-    `;
-  }
-
-  return `<div class="art-image" role="img" aria-label="${item.alt || item.title}"></div>`;
-}
-
-function renderFeaturedImage(post) {
-  if (post.featuredImage) {
-    return `
-      <div class="featured-image has-image">
-        <img src="${post.featuredImage}" alt="${post.featuredImageAlt || post.title}">
-      </div>
-    `;
-  }
-
-  return `<div class="featured-image" role="img" aria-label="Featured image placeholder for ${post.title}"></div>`;
-}
-
-async function fetchJson(url) {
-  try {
-    const response = await fetch(url, { cache: "no-store" });
-    if (!response.ok) return null;
-    return await response.json();
-  } catch {
-    return null;
-  }
-}
-
-function cloneData(data) {
-  return JSON.parse(JSON.stringify(data));
 }
