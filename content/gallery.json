@@ -1,0 +1,130 @@
+{
+  "gallery": [
+    {
+      "title": "The Wandering Fairy Cover",
+      "image": "images/web/the-wandering-fairy-cover.jpg",
+      "alt": "The Wandering Fairy cover art.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "The Wandering Fairy V2",
+      "image": "images/web/the-wandering-fairy-v2.jpg",
+      "alt": "A character in swirling magical currents holding a glowing book.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "The Wandering Fairy Low",
+      "image": "images/web/the-wandering-fairy-low.jpg",
+      "alt": "A bright magical character portrait under a vivid sky.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Soren Portrait",
+      "image": "images/web/soren-portrait.jpg",
+      "alt": "Soren standing in an enchanted forest with floating butterflies and a glowing lantern.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Soren Alternate Portrait",
+      "image": "images/web/soren-alternate.jpg",
+      "alt": "An alternate portrait of Soren in the enchanted forest scene.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Soren Wide Angle",
+      "image": "images/web/soren-wide-angle.jpg",
+      "alt": "Soren posed among ruined city rubble at sunset beside a floating spellbook.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "New Yarian",
+      "image": "images/web/new-yarian-map.jpg",
+      "alt": "A fantasy world map labeled Yarian with regions and a legend.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Julie Mugshot",
+      "image": "images/web/julie-mugshot.jpg",
+      "alt": "A dark portrait of a girl with teal eyes in a white shirt and black tie.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Frozen Moon Commission",
+      "image": "images/web/frozen-moon-commission.jpg",
+      "alt": "A glowing golden-toned fantasy illustration centered on a seated figure over a chessboard.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Frozen Moon Commission 2",
+      "image": "images/web/frozen-moon-commission-2.jpg",
+      "alt": "A dark fantasy illustration of a pale girl before a towering skeleton.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Commission 1",
+      "image": "images/web/commission-1.jpg",
+      "alt": "A green-lit character scene in a towering shaft filled with keys and symbols.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Commission 1 Zoomed",
+      "image": "images/web/commission-1-zoomed.jpg",
+      "alt": "A closer view of the green-lit magical scene with the central character.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Art CM V5",
+      "image": "images/web/art-cm-v5.jpg",
+      "alt": "A dramatic fantasy portrait in spiraling magic and water.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    },
+    {
+      "title": "Twtc April 26",
+      "image": "images/web/twtc-april-26.jpg",
+      "alt": "A stylized fantasy scene with a seated figure, bright glyphs, and a chessboard below.",
+      "artist": "Official artwork",
+      "category": "Official artwork",
+      "creditLabel": "Official work",
+      "credit": ""
+    }
+  ]
+}

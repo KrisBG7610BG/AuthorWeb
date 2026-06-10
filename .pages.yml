@@ -1,10 +1,10 @@
 media:
-  input: assets/uploads
-  output: /assets/uploads
+  input: images/web
+  output: images/web
 
 content:
   - name: site
-    label: Site Content
+    label: Site Settings
     type: file
     path: content/site.json
     format: json
@@ -49,6 +49,21 @@ content:
           - { name: volumePlannedChapters, label: Planned Chapters In Volume, type: number }
           - { name: url, label: URL, type: string }
           - { name: checkedAt, label: Checked At, type: date }
+      - name: projects
+        label: Progress Bars
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: percent, label: Percent, type: number }
+          - { name: phase, label: Phase, type: string }
+          - { name: note, label: Note, type: text }
+  - name: books
+    label: Books
+    type: file
+    path: content/books.json
+    format: json
+    fields:
       - name: books
         label: Books
         type: object
@@ -56,6 +71,7 @@ content:
         fields:
           - { name: title, label: Title, type: string }
           - { name: coverLabel, label: Cover Label, type: string }
+          - { name: coverImage, label: Cover Image, type: image }
           - { name: series, label: Series, type: string }
           - { name: description, label: Description, type: text }
           - { name: status, label: Status, type: string }
@@ -66,24 +82,30 @@ content:
             fields:
               - { name: label, label: Label, type: string }
               - { name: url, label: URL, type: string }
-      - name: projects
-        label: Progress Bars
-        type: object
-        list: true
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: percent, label: Percent, type: number }
-          - { name: phase, label: Phase, type: string }
-          - { name: note, label: Note, type: text }
+  - name: gallery
+    label: Gallery
+    type: file
+    path: content/gallery.json
+    format: json
+    fields:
       - name: gallery
-        label: Gallery
+        label: Gallery Items
         type: object
         list: true
         fields:
           - { name: title, label: Title, type: string }
+          - { name: image, label: Image, type: image }
+          - { name: alt, label: Alt Text, type: text }
           - { name: artist, label: Artist, type: string }
           - { name: category, label: Category, type: string }
+          - { name: creditLabel, label: Credit Label, type: string }
           - { name: credit, label: Credit Link, type: string }
+  - name: posts
+    label: Blog Posts
+    type: file
+    path: content/posts.json
+    format: json
+    fields:
       - name: posts
         label: Blog Posts
         type: object
@@ -93,6 +115,8 @@ content:
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date }
           - { name: author, label: Author, type: string }
+          - { name: featuredImage, label: Featured Image, type: image }
+          - { name: featuredImageAlt, label: Featured Image Alt, type: text }
           - { name: tags, label: Tags, type: string, list: true }
           - { name: excerpt, label: Excerpt, type: text }
           - { name: content, label: Content Paragraphs, type: text, list: true }

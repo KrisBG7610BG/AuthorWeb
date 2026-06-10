@@ -1,0 +1,22 @@
+{
+  "books": [
+    {
+      "title": "The Wandering Fairy: Board of Fate",
+      "coverLabel": "Board of Fate",
+      "coverImage": "images/web/the-wandering-fairy-cover.jpg",
+      "series": "The Wandering Fairy",
+      "description": "Soren follows a strange answer across worlds and dimensions, chasing forbidden knowledge through LitRPG systems, mythic powers, and faerie-touched danger.",
+      "status": "Book 1 available",
+      "links": [
+        {
+          "label": "Buy on Amazon",
+          "url": "https://www.amazon.com/dp/B0GTVT7XG3?ref_=cm_sw_r_ffobk_cp_ud_dp_TS6SGE2W35YMMZR75NYB&bestFormat=true"
+        },
+        {
+          "label": "Read on Royal Road",
+          "url": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping"
+        }
+      ]
+    }
+  ]
+}

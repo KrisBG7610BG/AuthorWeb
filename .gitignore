@@ -1,0 +1,6 @@
+node_modules/
+
+# Keep large local art originals out of the GitHub Pages deploy.
+images/*
+!images/web/
+!images/web/**
