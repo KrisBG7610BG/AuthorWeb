@@ -1,0 +1,122 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - name: site
+    label: Site Settings
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: author
+        label: Author
+        type: object
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: tagline, label: Tagline, type: text }
+          - { name: shortBio, label: Short Bio, type: text }
+          - { name: longBio, label: Long Bio, type: text }
+          - { name: email, label: Email, type: string }
+          - name: socials
+            label: Social Links
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url, label: URL, type: string }
+      - name: links
+        label: Links
+        type: object
+        fields:
+          - { name: royalRoad, label: Royal Road, type: string }
+          - { name: royalRoadChapter1, label: Royal Road Chapter 1, type: string }
+          - { name: royalRoadChapter105, label: Royal Road Chapter 105, type: string }
+          - { name: amazon, label: Amazon, type: string }
+          - { name: newsletterNote, label: Newsletter Note, type: text }
+          - { name: newsletterEndpoint, label: Newsletter Endpoint, type: string }
+      - name: latestPublished
+        label: Latest Published Fallback
+        type: object
+        fields:
+          - { name: chapter, label: Chapter, type: number }
+          - { name: title, label: Title, type: string }
+          - { name: volume, label: Volume, type: string }
+          - { name: volumeNumber, label: Volume Number, type: number }
+          - { name: totalVolumes, label: Total Volumes, type: number }
+          - { name: plannedChapters, label: Planned Chapters, type: number }
+          - { name: volumeChapter, label: Current Volume Chapter, type: number }
+          - { name: volumePlannedChapters, label: Planned Chapters In Volume, type: number }
+          - { name: url, label: URL, type: string }
+          - { name: checkedAt, label: Checked At, type: date }
+      - name: projects
+        label: Progress Bars
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: percent, label: Percent, type: number }
+          - { name: phase, label: Phase, type: string }
+          - { name: note, label: Note, type: text }
+  - name: books
+    label: Books
+    type: file
+    path: content/books.json
+    format: json
+    fields:
+      - name: books
+        label: Books
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: coverLabel, label: Cover Label, type: string }
+          - { name: coverImage, label: Cover Image, type: image }
+          - { name: series, label: Series, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: status, label: Status, type: string }
+          - name: links
+            label: Links
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url, label: URL, type: string }
+  - name: gallery
+    label: Gallery
+    type: file
+    path: content/gallery.json
+    format: json
+    fields:
+      - name: gallery
+        label: Gallery Items
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: image, label: Image, type: image }
+          - { name: alt, label: Alt Text, type: text }
+          - { name: artist, label: Artist, type: string }
+          - { name: category, label: Category, type: string }
+          - { name: creditLabel, label: Credit Label, type: string }
+          - { name: credit, label: Credit Link, type: string }
+  - name: posts
+    label: Blog Posts
+    type: file
+    path: content/posts.json
+    format: json
+    fields:
+      - name: posts
+        label: Blog Posts
+        type: object
+        list: true
+        fields:
+          - { name: slug, label: Slug, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: date, label: Date, type: date }
+          - { name: author, label: Author, type: string }
+          - { name: featuredImage, label: Featured Image, type: image }
+          - { name: featuredImageAlt, label: Featured Image Alt, type: text }
+          - { name: tags, label: Tags, type: string, list: true }
+          - { name: excerpt, label: Excerpt, type: text }
+          - { name: content, label: Content Paragraphs, type: text, list: true }

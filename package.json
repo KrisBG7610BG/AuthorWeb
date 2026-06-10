@@ -1,0 +1,11 @@
+{
+  "name": "the-wandering-fairy-author-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static author website for The Wandering Fairy.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "update:latest": "node update-latest-chapter.js"
+  }
+}
