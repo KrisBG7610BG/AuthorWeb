@@ -97,6 +97,8 @@ const defaultSiteData = {
 };
 
 let siteData = defaultSiteData;
+let lightboxItems = [];
+let activeLightboxIndex = 0;
 
 const routes = {
   "/": renderHome,
@@ -123,6 +125,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   await loadLatestPublishedData();
   renderRoute();
 });
+
+window.addEventListener("keydown", handleLightboxKeys);
 
 async function loadSiteData() {
   const baseData = cloneData(defaultSiteData);
@@ -307,6 +311,7 @@ function renderGallery(activeCategory = "All") {
   const items = activeCategory === "All"
     ? siteData.gallery
     : siteData.gallery.filter((item) => item.category === activeCategory);
+  lightboxItems = items.filter((item) => item.image);
 
   main.innerHTML = `
     <section class="panel">
@@ -324,6 +329,10 @@ function renderGallery(activeCategory = "All") {
 
   document.querySelectorAll("[data-category]").forEach((button) => {
     button.addEventListener("click", () => renderGallery(button.dataset.category));
+  });
+
+  document.querySelectorAll("[data-gallery-index]").forEach((button) => {
+    button.addEventListener("click", () => openLightbox(Number(button.dataset.galleryIndex)));
   });
 }
 
@@ -470,13 +479,14 @@ function renderProject(project) {
 }
 
 function renderArtCard(item) {
+  const galleryIndex = lightboxItems.findIndex((galleryItem) => galleryItem === item);
   const creditMarkup = item.credit
     ? `<a href="${item.credit}" target="_blank" rel="noreferrer">${item.creditLabel || "Credit link"}</a>`
     : `<span class="post-meta">${item.creditLabel || "Official artwork"}</span>`;
 
   return `
     <article class="art-card">
-      ${renderGalleryImage(item)}
+      ${renderGalleryImage(item, galleryIndex)}
       <h3>${item.title}</h3>
       <p class="post-meta">${item.category} by ${item.artist}</p>
       ${creditMarkup}
@@ -625,12 +635,12 @@ function renderCover(book) {
   return `<div class="cover" role="img" aria-label="Cover placeholder for ${book.title}">${book.coverLabel || book.title}</div>`;
 }
 
-function renderGalleryImage(item) {
+function renderGalleryImage(item, galleryIndex) {
   if (item.image) {
     return `
-      <div class="art-image has-image">
+      <button class="art-image has-image art-open" type="button" data-gallery-index="${galleryIndex}" aria-label="Open ${item.title} full screen">
         <img src="${assetUrl(item.image)}" alt="${item.alt || item.title}">
-      </div>
+      </button>
     `;
   }
 
@@ -665,4 +675,83 @@ function cloneData(data) {
 
 function assetUrl(value = "") {
   return String(value).replace(/^\/+/, "");
+}
+
+function openLightbox(index) {
+  if (!lightboxItems[index]) return;
+  activeLightboxIndex = index;
+  document.body.classList.add("lightbox-open");
+  renderLightbox();
+}
+
+function closeLightbox() {
+  const lightbox = document.querySelector(".lightbox");
+  if (!lightbox) return;
+  lightbox.classList.remove("is-open");
+  document.body.classList.remove("lightbox-open");
+  window.setTimeout(() => lightbox.remove(), 240);
+}
+
+function moveLightbox(direction) {
+  if (!lightboxItems.length) return;
+  activeLightboxIndex = (activeLightboxIndex + direction + lightboxItems.length) % lightboxItems.length;
+  renderLightbox();
+}
+
+function renderLightbox() {
+  const item = lightboxItems[activeLightboxIndex];
+  if (!item) return;
+
+  let lightbox = document.querySelector(".lightbox");
+  if (!lightbox) {
+    lightbox = document.createElement("section");
+    lightbox.className = "lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Gallery image viewer");
+    document.body.append(lightbox);
+  }
+
+  lightbox.innerHTML = `
+    <button class="lightbox-backdrop" type="button" aria-label="Close gallery viewer"></button>
+    <figure class="lightbox-frame">
+      <img src="${assetUrl(item.image)}" alt="${item.alt || item.title}">
+      <figcaption>
+        <strong>${item.title}</strong>
+        <span>${item.category || "Artwork"}${item.artist ? ` by ${item.artist}` : ""}</span>
+      </figcaption>
+    </figure>
+    <button class="lightbox-control lightbox-close" type="button" aria-label="Close gallery viewer">&times;</button>
+    <button class="lightbox-control lightbox-prev" type="button" aria-label="Previous artwork">&#8249;</button>
+    <button class="lightbox-control lightbox-next" type="button" aria-label="Next artwork">&#8250;</button>
+  `;
+
+  lightbox.querySelector(".lightbox-backdrop").addEventListener("click", closeLightbox);
+  lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+  lightbox.querySelector(".lightbox-prev").addEventListener("click", () => moveLightbox(-1));
+  lightbox.querySelector(".lightbox-next").addEventListener("click", () => moveLightbox(1));
+
+  requestAnimationFrame(() => {
+    lightbox.classList.add("is-open");
+    lightbox.querySelector(".lightbox-close").focus({ preventScroll: true });
+  });
+}
+
+function handleLightboxKeys(event) {
+  if (!document.querySelector(".lightbox")) return;
+
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeLightbox();
+  }
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    moveLightbox(-1);
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    moveLightbox(1);
+  }
 }
