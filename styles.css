@@ -485,6 +485,34 @@ p {
   color: var(--text);
 }
 
+.blog-tools {
+  display: grid;
+  gap: 0.8rem;
+  border: 2px solid var(--border);
+  background: oklch(24% 0.035 62);
+  padding: 1rem;
+}
+
+.blog-tools .tabs {
+  margin-bottom: 0;
+}
+
+.search-field input {
+  max-width: 520px;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  border: 2px dashed var(--border);
+  background: oklch(22% 0.035 62);
+  padding: 1rem;
+  color: var(--muted);
+}
+
+.empty-state p {
+  margin: 0;
+}
+
 .art-image,
 .featured-image {
   min-height: 190px;

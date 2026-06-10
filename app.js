@@ -308,10 +308,10 @@ function renderLatestPublished() {
 }
 
 function renderGallery(activeCategory = "All") {
-  const categories = ["All", ...new Set(siteData.gallery.map((item) => item.category).filter(Boolean))];
+  const categories = galleryCategories();
   const items = activeCategory === "All"
     ? siteData.gallery
-    : siteData.gallery.filter((item) => item.category === activeCategory);
+    : siteData.gallery.filter((item) => galleryCategoryKey(item.category) === galleryCategoryKey(activeCategory));
   lightboxItems = items.filter((item) => item.image);
 
   main.innerHTML = `
@@ -324,7 +324,7 @@ function renderGallery(activeCategory = "All") {
       <div class="tabs" role="tablist" aria-label="Gallery categories">
         ${categories.map((category) => `<button class="tab" type="button" role="tab" aria-selected="${category === activeCategory}" data-category="${category}">${category}</button>`).join("")}
       </div>
-      <div class="grid">${items.map(renderArtCard).join("")}</div>
+      ${items.length ? `<div class="grid">${items.map(renderArtCard).join("")}</div>` : renderEmptyState("No art here yet.")}
     </section>
   `;
 
@@ -338,14 +338,26 @@ function renderGallery(activeCategory = "All") {
 }
 
 function renderBlog() {
+  const tags = blogTags();
   main.innerHTML = `
     <section class="panel parchment">
       <p class="eyebrow">Updates, release news, and notes</p>
       <h1>Blog</h1>
       <p>Release notes, Royal Road updates, personal notes, and site announcements from the author.</p>
     </section>
-    <section class="section grid">${siteData.posts.map(renderPostCard).join("")}</section>
+    <section class="section blog-tools" aria-label="Blog filters">
+      <label class="field search-field">
+        Search posts
+        <input type="search" data-blog-search placeholder="Search by title, tag, or text" autocomplete="off">
+      </label>
+      <div class="tabs blog-filter-tabs" role="tablist" aria-label="Blog tags">
+        ${tags.map((tag) => `<button class="tab" type="button" role="tab" aria-selected="${tag === "All"}" data-blog-tag="${tag}">${tag}</button>`).join("")}
+      </div>
+      <p class="post-meta" data-blog-count>${siteData.posts.length} posts</p>
+    </section>
+    <section class="section grid" data-blog-results>${siteData.posts.map(renderPostCard).join("")}</section>
   `;
+  bindBlogFilters();
 }
 
 function renderPost(slug) {
@@ -504,6 +516,75 @@ function renderPostCard(post) {
       <ul class="tag-list">${post.tags.map((tag) => `<li>${tag}</li>`).join("")}</ul>
       <a class="button" href="#/blog/${post.slug}">Read post</a>
     </article>
+  `;
+}
+
+function bindBlogFilters() {
+  const search = document.querySelector("[data-blog-search]");
+  const tagButtons = Array.from(document.querySelectorAll("[data-blog-tag]"));
+  const results = document.querySelector("[data-blog-results]");
+  const count = document.querySelector("[data-blog-count]");
+  let activeTag = "All";
+
+  if (!search || !results || !count) return;
+
+  const update = () => {
+    const query = search.value.trim().toLowerCase();
+    const posts = siteData.posts.filter((post) => postMatchesSearch(post, query) && postMatchesTag(post, activeTag));
+    results.innerHTML = posts.length ? posts.map(renderPostCard).join("") : renderEmptyState("No posts match that search.");
+    count.textContent = `${posts.length} ${posts.length === 1 ? "post" : "posts"}`;
+  };
+
+  search.addEventListener("input", update);
+  tagButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeTag = button.dataset.blogTag || "All";
+      tagButtons.forEach((item) => item.setAttribute("aria-selected", String(item === button)));
+      update();
+    });
+  });
+}
+
+function postMatchesSearch(post, query) {
+  if (!query) return true;
+  const haystack = [
+    post.title,
+    post.author,
+    post.excerpt,
+    ...(post.tags || []),
+    ...(post.content || [])
+  ].join(" ").toLowerCase();
+
+  return haystack.includes(query);
+}
+
+function postMatchesTag(post, tag) {
+  if (tag === "All") return true;
+  return (post.tags || []).some((item) => item.toLowerCase() === tag.toLowerCase());
+}
+
+function blogTags() {
+  return ["All", ...new Set(siteData.posts.flatMap((post) => post.tags || []))];
+}
+
+function galleryCategories() {
+  const categories = siteData.gallery.map((item) => item.category).filter(Boolean);
+  const required = ["Official artwork", "Fan Art"];
+  const extras = categories.filter((category) => !required.some((item) => galleryCategoryKey(item) === galleryCategoryKey(category)));
+
+  return ["All", ...required, ...new Set(extras)];
+}
+
+function galleryCategoryKey(category = "") {
+  const value = category.toLowerCase().replace(/\s+/g, "");
+  return value === "fanart" ? "fanart" : value;
+}
+
+function renderEmptyState(message) {
+  return `
+    <div class="empty-state">
+      <p>${message}</p>
+    </div>
   `;
 }
 
