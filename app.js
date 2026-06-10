@@ -61,8 +61,8 @@ const defaultSiteData = {
       title: "Welcome to The Wandering Fairy Home Page",
       date: "2026-05-01",
       author: "Frozen Over The Moon",
-      featuredImage: "images/web/the-wandering-fairy-v2.jpg",
-      featuredImageAlt: "A magical Wandering Fairy illustration with a glowing book and swirling power.",
+      featuredImage: "images/web/art-cm-v5.jpg",
+      featuredImageAlt: "A magical Wandering Fairy illustration with a glowing book and spiraling power.",
       tags: ["site news", "updates"],
       excerpt: "A fresh old-school corner for The Wandering Fairy links, progress notes, art, and reader updates.",
       content: [
