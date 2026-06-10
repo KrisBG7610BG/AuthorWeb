@@ -34,7 +34,8 @@ content:
           - { name: royalRoadChapter105, label: Royal Road Chapter 105, type: string }
           - { name: amazon, label: Amazon, type: string }
           - { name: newsletterNote, label: Newsletter Note, type: text }
-          - { name: newsletterEndpoint, label: Newsletter Endpoint, type: string }
+          - { name: newsletterProvider, label: Newsletter Provider, type: string }
+          - { name: newsletterEndpoint, label: MailerLite Form Action URL, type: string }
       - name: latestPublished
         label: Latest Published Fallback
         type: object

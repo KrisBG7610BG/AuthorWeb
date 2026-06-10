@@ -20,6 +20,7 @@ const defaultSiteData = {
     royalRoadChapter105: "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping/chapter/2101357/chapter-105-chronicled-failures",
     amazon: "https://www.amazon.com/dp/B0GTVT7XG3?ref_=cm_sw_r_ffobk_cp_ud_dp_TS6SGE2W35YMMZR75NYB&bestFormat=true",
     newsletterNote: "Occasional updates only. No spam, no cursed chain letters.",
+    newsletterProvider: "mailerlite",
     newsletterEndpoint: ""
   },
   latestPublished: {
@@ -538,11 +539,17 @@ function bindForms() {
 async function submitNewsletter(form, message) {
   const endpoint = siteData.links.newsletterEndpoint?.trim();
   const email = form.querySelector('input[type="email"]').value.trim();
+  const provider = siteData.links.newsletterProvider || "mailerlite";
 
   message.className = "form-message";
   if (!endpoint) {
-    message.textContent = "Newsletter endpoint missing. Add a Formspree, Buttondown, ConvertKit, or Mailchimp endpoint in Pages CMS.";
+    message.textContent = "MailerLite form URL missing. Add the embedded form action URL in Pages CMS.";
     message.classList.add("error");
+    return;
+  }
+
+  if (provider.toLowerCase() === "mailerlite" || endpoint.includes("mailerlite.com")) {
+    await submitMailerLite(endpoint, email, form, message);
     return;
   }
 
@@ -568,6 +575,39 @@ async function submitNewsletter(form, message) {
     message.textContent = "Signup failed. Please try again or use the author's social links.";
     message.classList.add("error");
   }
+}
+
+function submitMailerLite(endpoint, email, form, message) {
+  return new Promise((resolve) => {
+    const frameName = `mailerlite_signup_${Date.now()}`;
+    const iframe = document.createElement("iframe");
+    const proxyForm = document.createElement("form");
+
+    iframe.name = frameName;
+    iframe.hidden = true;
+
+    proxyForm.action = endpoint;
+    proxyForm.method = "POST";
+    proxyForm.target = frameName;
+    proxyForm.hidden = true;
+    proxyForm.innerHTML = `
+      <input type="hidden" name="fields[email]" value="${escapeAttribute(email)}">
+      <input type="hidden" name="ml-submit" value="1">
+      <input type="hidden" name="anticsrf" value="true">
+    `;
+
+    document.body.append(iframe, proxyForm);
+    proxyForm.submit();
+
+    window.setTimeout(() => {
+      message.textContent = "Signed up. Please check your inbox if MailerLite asks for confirmation.";
+      message.classList.add("success");
+      form.reset();
+      proxyForm.remove();
+      iframe.remove();
+      resolve();
+    }, 900);
+  });
 }
 
 async function hydrateLatestPublished() {
@@ -675,6 +715,14 @@ function cloneData(data) {
 
 function assetUrl(value = "") {
   return String(value).replace(/^\/+/, "");
+}
+
+function escapeAttribute(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function openLightbox(index) {

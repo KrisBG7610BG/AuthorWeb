@@ -30,7 +30,8 @@
     "royalRoadChapter105": "https://www.royalroad.com/fiction/94680/the-wandering-fairy-litrpg-world-hopping/chapter/2101357/chapter-105-chronicled-failures",
     "amazon": "https://www.amazon.com/dp/B0GTVT7XG3?ref_=cm_sw_r_ffobk_cp_ud_dp_TS6SGE2W35YMMZR75NYB&bestFormat=true",
     "newsletterNote": "Occasional updates only. No spam, no cursed chain letters.",
-    "newsletterEndpoint": ""
+    "newsletterProvider": "mailerlite",
+    "newsletterEndpoint": "https://assets.mailerlite.com/jsonp/2423264/forms/189904070814730010/subscribe"
   },
   "latestPublished": {
     "chapter": 301,

@@ -40,16 +40,15 @@ For GitHub Pages, keep the project as static files. The site loads the JSON cont
 
 ## Newsletter
 
-GitHub Pages cannot store email signups by itself. To make the mailing list collect real emails, create a form endpoint with a provider such as Formspree, Buttondown, ConvertKit, Mailchimp, or Resend, then paste that URL into `links.newsletterEndpoint` in `content/site.json` through Pages CMS.
+GitHub Pages cannot store email signups by itself. This site is wired for MailerLite embedded forms.
 
-The newsletter form posts JSON with:
+In MailerLite, create an Embedded form, open its embed code, and copy the form `action` URL. It usually looks like:
 
-```json
-{
-  "email": "reader@example.com",
-  "source": "Frozen Over The Moon author website"
-}
+```text
+https://assets.mailerlite.com/jsonp/ACCOUNT_ID/forms/FORM_ID/subscribe
 ```
+
+Paste that URL into `links.newsletterEndpoint` in `content/site.json` through Pages CMS. Keep `links.newsletterProvider` set to `mailerlite`.
 
 ## Updating Progress
 
@@ -64,4 +63,4 @@ The published progress bar uses estimated total chapters so it can move 40%, 41%
 
 ## Notes
 
-The newsletter form is ready to send to a configured provider endpoint. The contact form is still frontend-only until a contact/email endpoint is added.
+The newsletter form is ready for a MailerLite embedded form action URL. The contact form is still frontend-only until a contact/email endpoint is added.
